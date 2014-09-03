@@ -11,15 +11,19 @@ fi
 
 load_dotfiles() {
     declare -a files=(
-        $HOME/.bash-lib/bash_options # Options
-        $HOME/.bash-lib/bash_exports # Exports
-        $HOME/.bash-lib/bash_aliases # Aliases
-        $HOME/.bash-lib/functions/*  # Functions
-        $HOME/.bash-lib/bash_prompt  # Custom bash prompt
-        $HOME/.bash-lib/bash_paths   # Path modifications
-        $(brew --prefix)/etc/bash_completion # Bash completion (installed via Homebrew)
-        $HOME/.bash_profile.local # Local and private settings not under version control (e.g. git credentials)
+        $HOME/.bash-lib/bash_options     # Options
+        $HOME/.bash-lib/bash_exports     # Exports
+        $HOME/.bash-lib/bash_aliases     # Aliases
+        $HOME/.bash-lib/bash_completion  # Completion
+        $HOME/.bash-lib/functions/*      # Functions
+        $HOME/.bash-lib/bash_prompt      # Custom bash prompt
+        $HOME/.bash-lib/bash_paths       # Path modifications
+        $HOME/.bash_profile.local        # Local and private settings not under version control (e.g. git credentials)
     )
+
+    if [[ "$OSTYPE" == "darwin"* ]]; then
+      files+=($(brew --prefix)/etc/bash_completion) # Bash completion (installed via Homebrew)
+    fi
 
     # if these files are readable, source them
     for index in ${!files[*]}
