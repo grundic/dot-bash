@@ -8,6 +8,10 @@ if [[ $COLORTERM == gnome-* && $TERM == xterm ]] && infocmp gnome-256color >/dev
 elif infocmp xterm-256color >/dev/null 2>&1; then
     export TERM=xterm-256color
 fi
+if [[ ! -z "$TMUX" ]]; then
+  export TERM=screen-256color
+fi
+
 
 load_dotfiles() {
     declare -a files=(
